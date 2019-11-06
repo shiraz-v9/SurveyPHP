@@ -58,7 +58,15 @@ else
 
 // make our table:
 // notice that the username field is a PRIMARY KEY and so must be unique in each record
-$sql = "CREATE TABLE users (username VARCHAR(16), password VARCHAR(16), email VARCHAR(64), PRIMARY KEY(username))";
+$sql = "CREATE TABLE users 
+(username VARCHAR(16), 
+password VARCHAR(16), 
+firstname VARCHAR(16), 
+surname VARCHAR(16), 
+email VARCHAR(64), 
+DOB VARCHAR(12), 
+telephone VARCHAR(16),
+PRIMARY KEY(username))";
 
 // no data returned, we just test for true(success)/false(failure):
 if (mysqli_query($connection, $sql)) 
@@ -73,20 +81,23 @@ else
 
 // put some data in our table:
 // create an array variable for each field in the DB that we want to populate
-$usernames[] = 'barrym'; $passwords[] = 'letmein'; $emails[] = 'barry@m-domain.com';
-$usernames[] = 'mandyb'; $passwords[] = 'abc123'; $emails[] = 'webmaster@mandy-g.co.uk';
-$usernames[] = 'timmy'; $passwords[] = 'secret95'; $emails[] = 'timmy@lassie.com';
-$usernames[] = 'briang'; $passwords[] = 'password'; $emails[] = 'brian@quahog.gov';
-$usernames[] = 'a'; $passwords[] = 'test'; $emails[] = 'a@alphabet.test.com';
-$usernames[] = 'b'; $passwords[] = 'test'; $emails[] = 'b@alphabet.test.com';
-$usernames[] = 'c'; $passwords[] = 'test'; $emails[] = 'c@alphabet.test.com';
-$usernames[] = 'd'; $passwords[] = 'test'; $emails[] = 'd@alphabet.test.com';
+$usernames[] = 'barrym'; $passwords[] = 'letmein'; $firstnames[] = 'barry'; $surnames[] = 'moose'; $emails[] = 'barry@m-domain.com'; $DOBs[] = '10/11/1999'; $telephones[] = '0744312321';
+
+$usernames[] = 'mandyb'; $passwords[] = 'abc123'; $firstnames[] = 'mandy'; $surnames[] = 'bell'; $emails[] = 'webmaster@mandy-g.co.uk'; $DOBs[] = '10/12/1999'; $telephones[] = '07412817604';
+
+//$usernames[] = 'timmy'; $passwords[] = 'secret95'; $emails[] = 'timmy@lassie.com';
+//$usernames[] = 'briang'; $passwords[] = 'password'; $emails[] = 'brian@quahog.gov';
+//$usernames[] = 'a'; $passwords[] = 'test'; $emails[] = 'a@alphabet.test.com';
+//$usernames[] = 'b'; $passwords[] = 'test'; $emails[] = 'b@alphabet.test.com';
+//$usernames[] = 'c'; $passwords[] = 'test'; $emails[] = 'c@alphabet.test.com';
+//$usernames[] = 'd'; $passwords[] = 'test'; $emails[] = 'd@alphabet.test.com';
 
 // loop through the arrays above and add rows to the table:
 for ($i=0; $i<count($usernames); $i++)
 {
 	// create the SQL query to be executed
-    $sql = "INSERT INTO users (username, password, email) VALUES ('$usernames[$i]', '$passwords[$i]', '$emails[$i]')";
+    $sql = "INSERT INTO users (username, password, firstname, surname, email, DOB, telephone) 
+    VALUES ('$usernames[$i]', '$passwords[$i]', '$firstnames[$i],'$surnames[$i]', '$emails[$i]', '$DOBs[$i]', '$telephones[$i]')";
 	
 	// run the above query '$sql' on our DB
     // no data returned, we just test for true(success)/false(failure):
@@ -97,7 +108,7 @@ for ($i=0; $i<count($usernames); $i++)
 
 	else 
 	{
-		die("Error inserting row: " . mysqli_error($connection));
+		die("Error inserting row: <br>" . mysqli_error($connection));
 	}
 }
 

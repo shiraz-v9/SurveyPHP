@@ -17,12 +17,21 @@ require_once "header.php";
 // default values we show in the form:
 $username = "";
 $password = "";
+$firstname = "";
+$surname = "";
 $email = "";
+$DOB = "";
+$telephone = "";
 
 // strings to hold any validation error messages:
 $username_val = "";
+
 $password_val = "";
+$firstname_val = "";
+$surname_val = "";
 $email_val = "";
+$DOB_val = "";
+$telephone_val = "";
 
 // should we show the signup form?:
 $show_signup_form = false;
@@ -42,7 +51,7 @@ elseif (isset($_POST['username']))
 	// user just tried to sign up:
 	
 	// connect directly to our database (notice 4th argument) we need the connection for sanitisation:
-	$connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+	$connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname );
 	
 	// if the connection fails, we need to know, so allow this exit:
 	if (!$connection)
@@ -55,7 +64,11 @@ elseif (isset($_POST['username']))
 	// take copies of the credentials the user submitted, and sanitise (clean) them:
 	$username = sanitise($_POST['username'], $connection);
 	$password = sanitise($_POST['password'], $connection);
+    $firstname = sanitise($_POST['firstname'], $connection);
+    $surname = sanitise($_POST['surname'], $connection);
     $email = sanitise($_POST['email'], $connection);
+    $DOB = sanitise($_POST['DOB'], $connection);
+    $telephone = sanitise($_POST['telephone'], $connection);
 
 
 	// VALIDATION (see helper.php for the function definitions)
@@ -65,6 +78,15 @@ elseif (isset($_POST['username']))
     // email is VARCHAR(64) and telephone is VARCHAR(16) in the DB
 	$username_val = validateString($username, 1, 16);
 	$password_val = validateString($password, 1, 16);
+    $firstname_val = validateString($firstname, 1,32);
+    $surname_val = validateString($surname, 1,64);
+    $email_val = validateString($email, 1,64);
+    $DOB_val = validateString($DOB, 1,16);
+    $telephone_val = validateString($telephone, 1,16);
+
+    
+
+
     //the following line will validate the email as a string, but maybe you can do a better job...
     $email_val = validateString($email, 1, 64);
 	
@@ -76,7 +98,8 @@ elseif (isset($_POST['username']))
 	{
 		
 		// try to insert the new details:
-		$query = "INSERT INTO users (username, password, email) VALUES ('$username', '$password', '$email');";
+		$query = "INSERT INTO users (username, password, firstname, surname, email, DOB, telephone) 
+        VALUES ('$username', '$password', '$firstname', '$surname', '$email', '$DOB', '$telephone')";
 		$result = mysqli_query($connection, $query);
 		
 		// no data returned, we just test for true(success)/false(failure):
@@ -126,10 +149,38 @@ echo <<<_END
   <br>
   Password: <input type="password" name="password" maxlength="16" value="$password" required> $password_val
   <br>
+  First name: <input type="text" name="firstname" maxlength="64" value="$firstname" required> $firstname_val
+  <br>
+  Surname: <input type="text" name="surname" maxlength="64" value="$surname" required> $surname_val
+  <br>
   Email: <input type="email" name="email" maxlength="64" value="$email" required> $email_val
+  <br>
+  DOB: <input type="text" name="DOB" maxlength="10" value="$DOB" required> $DOB_val
+  <br>
+  Phone: <input type="text" name="telephone" maxlength="15" value="$telephone" required> $telephone_val
   <br>
   <input type="submit" value="Submit">
 </form>	
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+<style>
+body    {
+          background-image: url("sur.gif");
+          background-position: top;
+
+          background-color: #cccccc;
+          background-repeat: no-repeat;
+        }
+form, h1   {
+        font-family: 'Arvo', serif;
+
+        font-size: 25px;
+}
+</style>
+</head>
+<body>
 _END;
 }
 

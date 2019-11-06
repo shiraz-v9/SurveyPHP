@@ -54,11 +54,36 @@ echo <<<_END
 <a href='about.php'>About</a> ||
 <a href='sign_up.php'>Sign Up</a> ||
 <a href='sign_in.php'>Sign In</a>
+
+
+    
+    <style>
+        
+        a:link {
+              background-color: #f44336;
+              color: white;
+              padding: 10px 15px;
+              border-radius: 20px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              } 
+        a:hover{
+                background-color: darkorange;
+                color: white;
+                padding: 10px 15px;
+                border-radius: 20px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+            }
+        </style>
 _END;
+    
 }
 
 echo <<<_END
 <br>
-<h1>2CWK50: A Survey Website</h1>
+<h1>Kashif Tauseef: A Survey Website</h1>
 _END;
 ?>
