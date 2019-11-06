@@ -80,7 +80,7 @@ elseif (isset($_POST['username']))
 	$password_val = validateString($password, 1, 16);
     $firstname_val = validateString($firstname, 1,32);
     $surname_val = validateString($surname, 1,64);
-    $email_val = validateString($email, 1,64);
+    //$email_val = validateString($email, 1,64);
     $DOB_val = validateString($DOB, 1,16);
     $telephone_val = validateString($telephone, 1,16);
 
@@ -88,8 +88,12 @@ elseif (isset($_POST['username']))
 
 
     //the following line will validate the email as a string, but maybe you can do a better job...
-    $email_val = validateString($email, 1, 64);
-	
+            //    $username_val = validateString($username, 1,16);
+            //    $password_val = validateString($password, 1,16);
+            //    $firstname_val = validateString($firstname, 1,32);
+            //    $surname_val = validateString($surname, 1,62);
+	$email_val = validateString($email, 1, 64);
+    
 	// concatenate all the validation results together ($errors will only be empty if ALL the data is valid):
 	$errors = $username_val . $password_val . $email_val;
 	
@@ -155,7 +159,7 @@ echo <<<_END
   <br>
   Email: <input type="email" name="email" maxlength="64" value="$email" required> $email_val
   <br>
-  DOB: <input type="text" name="DOB" maxlength="10" value="$DOB" required> $DOB_val
+  DOB: <input type="date" name="DOB" maxlength="12" value="$DOB" required> $DOB_val
   <br>
   Phone: <input type="text" name="telephone" maxlength="15" value="$telephone" required> $telephone_val
   <br>

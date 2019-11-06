@@ -54,6 +54,7 @@ echo <<<_END
 <a href='about.php'>About</a> ||
 <a href='sign_up.php'>Sign Up</a> ||
 <a href='sign_in.php'>Sign In</a>
+<a href='create_data.php'>delete this</a>
 
 
     

@@ -72,29 +72,34 @@ elseif (isset($_POST['username']))
 		
 		// currently only barryg, mandyb, or timmy can sign in... each with ANY password
 		// you need to replace this code with code that checks the username and password against the relevant database table...
-		if ($username == "barrym" || $username == "mandyb" || $username == "timmy")
-		{
-			// fake a match with the database table:
-			$n = 1;	
-		}
+                    //		if ($username == "barrym" || $username == "mandyb" || $username == "timmy")
+                    //		{
+                    //			// fake a match with the database table:
+                    //			$n = 1;	
+                    //		}
+                    //
+                    //		else
+                    //		{
+                    //			$n = 0;
+                    //		}
+                    //			
+                    //		// if there was a match then set the session variables and display a success message:
+                    //		if ($n > 0)
+                    //		{
+                    //			// set a session variable to record that this user has successfully logged in:
+                    //			$_SESSION['loggedInSkeleton'] = true;
+                    //			// and copy their username into the session data for use by our other scripts:
+                    //			$_SESSION['username'] = $username;
+                    //			
+                    //			// show a successful signin message:
+                    //			$message = "Hi, $username, you have successfully logged in, please <a href='account.php'>click here</a><br>";
+                    //		}
 
-		else
-		{
-			$n = 0;
-		}
-			
-		// if there was a match then set the session variables and display a success message:
-		if ($n > 0)
-		{
-			// set a session variable to record that this user has successfully logged in:
-			$_SESSION['loggedInSkeleton'] = true;
-			// and copy their username into the session data for use by our other scripts:
-			$_SESSION['username'] = $username;
-			
-			// show a successful signin message:
-			$message = "Hi, $username, you have successfully logged in, please <a href='account.php'>click here</a><br>";
-		}
-
+        if ($username == "$username" || $password == "$password"){
+             
+        
+            $message = "Hi, $username, you have successfully logged in, please <a href='account.php'>click here</a><br>";
+        }
 		else
 		{
 			// no matching credentials found so redisplay the signin form with a failure message:
