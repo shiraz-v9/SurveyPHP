@@ -147,7 +147,7 @@ if ($show_signup_form)
 // show the form that allows users to sign up
 // Note we use an HTTP POST request to avoid their password appearing in the URL:	
 echo <<<_END
-<form action="sign_up.php" method="post">
+<form action="sign_up.php" method="$_POST">
   Please choose a username and password:<br>
   Username: <input type="text" name="username" maxlength="16" value="$username" required> $username_val
   <br>
