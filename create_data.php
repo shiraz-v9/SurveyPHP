@@ -58,15 +58,16 @@ else
 
 // make our table:
 // notice that the username field is a PRIMARY KEY and so must be unique in each record
-$sql = "CREATE TABLE users 
-(username VARCHAR(16), 
+$sql = "CREATE TABLE users (
+username VARCHAR(16), 
 password VARCHAR(16), 
 firstname VARCHAR(16), 
 surname VARCHAR(16), 
 email VARCHAR(64), 
 DOB VARCHAR(12), 
 telephone VARCHAR(16),
-PRIMARY KEY(username))";
+PRIMARY KEY(username)
+)";
 
 // no data returned, we just test for true(success)/false(failure):
 if (mysqli_query($connection, $sql)) 
@@ -82,7 +83,6 @@ else
 // put some data in our table:
 // create an array variable for each field in the DB that we want to populate
 $usernames[] = 'barrym'; $passwords[] = 'letmein'; $firstnames[] = 'barry'; $surnames[] = 'moose'; $emails[] = 'barry@m-domain.com'; $DOBs[] = '10/11/1999'; $telephones[] = '0744312321';
-
 $usernames[] = 'mandyb'; $passwords[] = 'abc123'; $firstnames[] = 'mandy'; $surnames[] = 'bell'; $emails[] = 'webmaster@mandy-g.co.uk'; $DOBs[] = '10/12/1999'; $telephones[] = '07412817604';
 
 //$usernames[] = 'timmy'; $passwords[] = 'secret95'; $emails[] = 'timmy@lassie.com';
