@@ -18,4 +18,6 @@ echo <<<_END
     </body>
     </html>
 _END;
+
+include 'styleSheet.css';
 ?>

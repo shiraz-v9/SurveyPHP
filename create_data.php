@@ -80,13 +80,7 @@ $usernames[] = 'barrym'; $passwords[] = 'letmein'; $firstnames[] = 'barton'; $su
 
 $usernames[] = 'mandyb'; $passwords[] = 'abc123'; $firstnames[] = 'mandy'; $surnames[] ='maddison'; $emails[] = 'webmaster@mandy-g.co.uk'; $DOBs[] = '20/03/1998'; $telephones [] = '07412817605';
 
-//$usernames[] = 'barrym'; $passwords[] = 'letmein'; $emails[] = 'barry@m-domain.com';
-//$usernames[] = 'timmy'; $passwords[] = 'secret95'; $emails[] = 'timmy@lassie.com';
-//$usernames[] = 'briang'; $passwords[] = 'password'; $emails[] = 'brian@quahog.gov';
-//$usernames[] = 'a'; $passwords[] = 'test'; $emails[] = 'a@alphabet.test.com';
-//$usernames[] = 'b'; $passwords[] = 'test'; $emails[] = 'b@alphabet.test.com';
-//$usernames[] = 'c'; $passwords[] = 'test'; $emails[] = 'c@alphabet.test.com';
-//$usernames[] = 'd'; $passwords[] = 'test'; $emails[] = 'd@alphabet.test.com';
+$usernames[] = 'admin'; $passwords[] = 'admin1234'; $firstnames[] = 'Kashif'; $surnames[] ='Tauseef'; $emails[] = 'kashiftauseef@gmail.com'; $DOBs[] = '20/03/1996'; $telephones [] = '07412817604';
 
 
 
@@ -110,9 +104,8 @@ for ($i=0; $i<count($usernames); $i++)
 	}
 }
 
-$query = 
-
 
 // we're finished, close the connection:
 mysqli_close($connection);
+include'styleSheet.css';
 ?>

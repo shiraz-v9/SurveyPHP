@@ -58,27 +58,7 @@ echo <<<_END
 
 
     
-    <style>
-        
-        a:link {
-              background-color: #f44336;
-              color: white;
-              padding: 10px 15px;
-              border-radius: 20px;
-              text-align: center;
-              text-decoration: none;
-              display: inline-block;
-              } 
-        a:hover{
-                background-color: darkorange;
-                color: white;
-                padding: 10px 15px;
-                border-radius: 20px;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-            }
-        </style>
+    
 _END;
     
 }
@@ -87,4 +67,6 @@ echo <<<_END
 <br>
 <h1>Kashif Tauseef: A Survey Website</h1>
 _END;
+
+include 'styleSheet.css';
 ?>

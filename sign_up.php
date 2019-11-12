@@ -165,20 +165,7 @@ echo <<<_END
 <html>
 <head>
 <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
-<style>
-body    {
-          background-image: url("sur.gif");
-          background-position: top;
 
-          background-color: #cccccc;
-          background-repeat: no-repeat;
-        }
-form, h1   {
-        font-family: 'Arvo', serif;
-
-        font-size: 25px;
-}
-</style>
 </head>
 <body>
 _END;
@@ -189,5 +176,6 @@ echo $message;
 
 // finish off the HTML for this page:
 require_once "footer.php";
+include 'styleSheet.css';
 
 ?>
