@@ -25,7 +25,6 @@ $telephone = "";
 
 // strings to hold any validation error messages:
 $username_val = "";
-
 $password_val = "";
 $firstname_val = "";
 $surname_val = "";
@@ -80,28 +79,24 @@ elseif (isset($_POST['username']))
 	$password_val = validateString($password, 1, 16);
     $firstname_val = validateString($firstname, 1,32);
     $surname_val = validateString($surname, 1,64);
-    //$email_val = validateString($email, 1,64);
+    //the following line will validate the email as a string, but maybe you can do a better job...
+	$email_val = validateString($email, 1, 64);
     $DOB_val = validateString($DOB, 1,16);
     $telephone_val = validateString($telephone, 1,16);
 
     
 
 
-    //the following line will validate the email as a string, but maybe you can do a better job...
-            //    $username_val = validateString($username, 1,16);
-            //    $password_val = validateString($password, 1,16);
-            //    $firstname_val = validateString($firstname, 1,32);
-            //    $surname_val = validateString($surname, 1,62);
-	$email_val = validateString($email, 1, 64);
+
     
 	// concatenate all the validation results together ($errors will only be empty if ALL the data is valid):
-	$errors = $username_val . $password_val . $email_val;
+	$errors = $username_val.$password_val .$firstname_val.$surname_val.$email_val.$DOB_val.$telephone_val;
 	
 	// check that all the validation tests passed before going to the database:
 	if ($errors == "")
 	{
 		
-		// try to insert the new details:
+		// Insert the new details into database
 		$query = "INSERT INTO users (username, password, firstname, surname, email, DOB, telephone) 
         VALUES ('$username', '$password', '$firstname', '$surname', '$email', '$DOB', '$telephone')";
 		$result = mysqli_query($connection, $query);
@@ -147,7 +142,7 @@ if ($show_signup_form)
 // show the form that allows users to sign up
 // Note we use an HTTP POST request to avoid their password appearing in the URL:	
 echo <<<_END
-<form action="sign_up.php" method="$_POST">
+<form action="sign_up.php" method="post">
   Please choose a username and password:<br>
   Username: <input type="text" name="username" maxlength="16" value="$username" required> $username_val
   <br>
@@ -165,6 +160,7 @@ echo <<<_END
   <br>
   <input type="submit" value="Submit">
 </form>	
+
 <!DOCTYPE html>
 <html>
 <head>

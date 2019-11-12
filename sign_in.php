@@ -90,11 +90,7 @@ elseif (isset($_POST['username']))
                 $message = "Hi, $username, you have successfully logged in, please <a href='account.php'>click here</a><br>";
             }
 
-//        if ($username == "$username" || $password == "$password"){
-//             $n=
-//        
-//            $message = "Hi, $username, you have successfully logged in, please <a href='account.php'>click here</a><br>";
-//        }
+
 		else
 		{
 			// no matching credentials found so redisplay the signin form with a failure message:
