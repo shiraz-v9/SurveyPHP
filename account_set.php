@@ -15,10 +15,20 @@
 require_once "header.php";
 
 // default values we show in the form:
+
+$firstname = "";
+$surname = "";
 $email = "";
-    
+$DOB = "";
+$telephone = "";
+
 // strings to hold any validation error messages:
+
+$firstname_val = "";
+$surname_val = "";
 $email_val = "";
+$DOB_val = "";
+$telephone_val = "";
  
 // should we show the set profile form?:
 $show_account_form = false;
@@ -35,7 +45,7 @@ if (!isset($_SESSION['loggedInSkeleton']))
 }
 
 
-elseif (isset($_POST['email']))
+elseif (isset($_POST['firstname']))
 {
 	// user just tried to update their profile
 	
@@ -47,24 +57,45 @@ elseif (isset($_POST['email']))
 	{
 		die("Connection failed: " . $mysqli_connect_error);
 	}
+    
+    
+    
 	
-	// SANITISATION CODE MISSING:
-
+	// SANITISATION CODE :
     // ...
     // Add your santitisation code around here
 	// ...
+    $firstname = sanitise($_POST['firstname'], $connection);
+    $surname = sanitise($_POST['surname'], $connection);
+    $email = ($_POST['email'], $connection);
+    $DOB = sanitise($_POST['DOB'], $connection);
+    $telephone = sanitise($_POST['telephone'], $connection);
+    
+    //USER INPUT VALIDATION
+
+    $firstname_val = validateString($firstname, 1,32);
+    $surname_val = validateString($surname, 1,64);
+    //EMAIL NEED FIXING
+    
+	$email_val = validateSanitizeEmail($email, $connection);
+    $DOB_val = validateString($DOB, 1,16);
+    $telephone_val = validateString($telephone, 1,16);
+    
+    
+
+    //ERRORS WILL BE CONCATENATED
+    $errors = $firstname_val.$surname_val.$email_val.$DOB_val.$telephone_val;
 	
 
-	$email = $_POST['email'];
+	//$updateEmail = $_POST['email'];
 
 	
 	// SERVER-SIDE VALIDATION CODE MISSING:
 
     // ...
-    // Add your santitisation code around here
-    // ...
+    
 	
-	$errors = "";
+
 	
 	// check that all the validation tests passed before going to the database:
 	if ($errors == "")
@@ -87,7 +118,8 @@ elseif (isset($_POST['email']))
 		if ($n > 0)
 		{
 			// we need an UPDATE:
-			$query = "UPDATE users SET email='$email' WHERE username='$username'";
+            $query = "UPDATE users SET firstname='$firstname', surname='$surname', email=''$email, DOB='$DOB', telephone='$telephone'
+            WHERE username='{$_SESSION['username']}'";
 			$result = mysqli_query($connection, $query);		
 		}
 	
@@ -119,50 +151,50 @@ elseif (isset($_POST['email']))
 
 }
 
-else
-{
-	// user has arrived at the page for the first time, show any data already in the table:
-	
-	// read the username from the session:
-	$username = $_SESSION["username"];
-	
-	// now read their profile data from the table...
-	
-	// connect directly to our database (notice 4th argument):
-	$connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-	
-	// if the connection fails, we need to know, so allow this exit:
-	if (!$connection)
-	{
-		die("Connection failed: " . $mysqli_connect_error);
-	}
-	
-	// check for a row in our profiles table with a matching username:
-	$query = "SELECT * FROM users WHERE username='$username'";
-	
-	// this query can return data ($result is an identifier):
-	$result = mysqli_query($connection, $query);
-	
-	// how many rows came back? (can only be 1 or 0 because username is the primary key in our table):
-	$n = mysqli_num_rows($result);
-		
-	// if there was a match then extract their profile data:
-	if ($n > 0)
-	{
-		// use the identifier to fetch one row as an associative array (elements named after columns):
-		$row = mysqli_fetch_assoc($result);
-		// extract their profile data for use in the HTML:
-		$email = $row['email'];
+    else
+    {
+        // user has arrived at the page for the first time, show any data already in the table:
 
-	}
-	
-	// show the set profile form:
-	$show_account_form = true;
-	
-	// we're finished with the database, close the connection:
-	mysqli_close($connection);
-	
-}
+        // read the username from the session:
+        $username = $_SESSION["username"];
+
+        // now read their profile data from the table...
+
+        // connect directly to our database (notice 4th argument):
+        $connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+
+        // if the connection fails, we need to know, so allow this exit:
+        if (!$connection)
+        {
+            die("Connection failed: " . $mysqli_connect_error);
+        }
+
+        // check for a row in our profiles table with a matching username:
+        $query = "SELECT * FROM users WHERE username='$username'";
+
+        // this query can return data ($result is an identifier):
+        $result = mysqli_query($connection, $query);
+
+        // how many rows came back? (can only be 1 or 0 because username is the primary key in our table):
+        $n = mysqli_num_rows($result);
+
+        // if there was a match then extract their profile data:
+        if ($n > 0)
+        {
+            // use the identifier to fetch one row as an associative array (elements named after columns):
+            $row = mysqli_fetch_assoc($result);
+            // extract their profile data for use in the HTML:
+            $email = $row['email'];
+
+        }
+
+        // show the set profile form:
+        $show_account_form = true;
+
+        // we're finished with the database, close the connection:
+        mysqli_close($connection);
+
+    }
 
 if ($show_account_form)
 {
@@ -174,7 +206,15 @@ echo <<<_END
       Update your profile info:<br>
       Username: {$_SESSION['username']}
       <br>
-      Email address: <input type="text" name="email" value="$email">
+      First Name: <input type="text" name="firstname" maxlength="64" value="$firstname">$firstname_val
+      <br>
+      Surname: <input type="text" name="surname" maxlength="64" value="$surname">$surname_val
+      <br>
+      Email address: <input type="email" name="email" maxlength="64 value="$email">$email_val
+      <br>
+      DOB: <input type="date" name="DOB" maxlength="12" value="$DOB">$DOB_val
+      <br>
+      Phone: <input type="text" name="telephone" maxlength="15" value="$telephone">$telephone_val
       <br>
       <input type="submit" value="Submit">
     </form>	

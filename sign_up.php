@@ -105,14 +105,14 @@ elseif (isset($_POST['username']))
 		if ($result) 
 		{
 			// show a successful signup message:
-			$message = "Signup was successful, please sign in<br>";
+			$message = "Signup was successful, please <a href = 'sign_in.php'Sign In> <a/><br>";
 		} 
 		else 
 		{
 			// show the form:
 			$show_signup_form = true;
 			// show an unsuccessful signup message:
-			$message = "Sign up failed, please try again<br>";
+			$message = "Sign up failed, please try again";
 		}
 			
 	}

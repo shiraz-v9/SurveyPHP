@@ -48,6 +48,13 @@ a:hover{
         text-decoration: none;
         display: inline-block;
     }
+a:visited{
+    color: floralwhite;
+        }
+a:active{
+    font-weight: bold;
+    background-color: limegreen;
+}
 
 
 body    {

@@ -36,7 +36,7 @@ else
 	{
 		echo "This is the adminitrator tools where you (Admin) should be able to access a list of all users and, upon clicking on a username, that user’s associated account information should be displayed.<br>";
         
-//        $query = "SELECT username, password, firstname, surname, email, DOB , telephone
+//        $query = "SELECT username, password, firstname,                 surname, email, DOB , telephone
 //        FROM users WHERE username='{$_GET['username']}'";
         $query = "SELECT * FROM users";
         
@@ -48,18 +48,20 @@ else
 
         if ($n>0){
             
-        echo "<table><br><br><tr><th> username</th>
+        echo "<table><br><br><tr>
+            <th> username</th>
             <th> password</th>
             <th> First Name</th>
             <th> Surname</th>
             <th> Email</th>
             <th> DOB</th>
-            <th> telephone</th>
+            <th> telephone </th>
+
             </tr>";
             
             
             
-        //}
+    
     
         
         
@@ -73,23 +75,21 @@ else
              echo "<td>". $row['email']."</td>";
              echo "<td>". $row['DOB']."</td>";
              echo "<td>". $row['telephone']."</td>";
+             
              echo "</tr>";
          }
             
-            
+
              echo "</table>";
             
-            $delete = "DELETE FROM users WHERE username=''"; 
-            $result = mysql_query($connection, $delete)
-            if ($connection  $delete) == TRUE) {
-                echo "Record deleted successfully";
-                } 
-            else    {
-                    echo ("Error deleting record: <br>" . $mysqli_connect_error)
-                    }
+
+            
+            
+            
+            
         
-}
             }
+    }
         
     
 
@@ -104,15 +104,20 @@ else
 echo <<<_END
 <!DOCTYPE html>
 <html>
+<head>
+ <style>a:active</style>
+</head>
 <body>
 
-<a href='$delete'>delete record</a>
-<a href='about.php'>About</a>
+<a href='delete'>Delete record</a>
+<a href='account_set.php'>Update record</a>
 
 </body>
 _END;
     
 require_once "footer.php";
 include'styleSheet.css';
+
+
 
 ?>
