@@ -12,14 +12,14 @@ footer.php{
 }
 
 table {
-    border: 2px;
+    border: 20px;
     width: 100%;
-    padding: 20px;
+ 
 }
 
 th {
 height: 50px;
-background-color: aquamarine;
+background-color: #21D261;
     text-align: center;
 }
 
@@ -31,16 +31,16 @@ td{
 
         
 a:link {
-      background-color: #f44336;
+      background-color: black;
       color: white;
       padding: 10px 15px;
-      border-radius: 20px;
+      border-radius: 30px;
       text-align: center;
       text-decoration: none;
       display: inline-block;
       } 
 a:hover{
-        background-color: darkorange;
+        background-color: #21D261;
         color: white;
         padding: 10px 15px;
         border-radius: 20px;

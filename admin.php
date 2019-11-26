@@ -2,8 +2,10 @@
 
 // Things to notice:
 // You need to add code to this script to implement the admin functions and features
-// Notice that the code not only checks whether the user is logged in, but also whether they are the admin, before it displays the page content
-// When an admin user is verified, you can implement all the admin tools functionality from this script, or distribute them over multiple pages - your choice
+// Notice that the code not only checks whether the user is logged in, but also whether they are the admin,
+//before it displays the page content
+// When an admin user is verified, you can implement all the admin tools functionality from this script, or distribute
+//them over multiple pages - your choice
 
 // execute the header script:
 require_once "header.php";
@@ -34,37 +36,39 @@ else
 	// only display the page content if this is the admin account (all other users get a "you don't have permission..." message):
 	if ($_SESSION['username'] == "admin")
 	{
-		echo "This is the adminitrator tools where you (Admin) should be able to access a list of all users and, upon clicking on a username, that user’s associated account information should be displayed.<br>";
-        
+		echo "This is the adminitrator tools where you (Admin) should be able to access a
+		list of all users and, upon clicking on a username, that user’s associated account information should be displayed.<br>";
+
 //        $query = "SELECT username, password, firstname,                 surname, email, DOB , telephone
 //        FROM users WHERE username='{$_GET['username']}'";
         $query = "SELECT * FROM users";
-        
+
         // this query can return data ($result is an identifier):
         $result = mysqli_query($connection, $query);
-        
+
         $n = mysqli_num_rows($result);
-        
+
 
         if ($n>0){
-            
+
         echo "<table><br><br><tr>
-            <th> username</th>
-            <th> password</th>
-            <th> First Name</th>
+            <th> Username</th>
+            <th> Password</th>
+            <th> Name</th>
             <th> Surname</th>
             <th> Email</th>
-            <th> DOB</th>
-            <th> telephone </th>
+            <th> Date of Birth</th>
+            <th> Phone </th>
+            <th> Edit </th>
 
             </tr>";
-            
-            
-            
-    
-    
-        
-        
+
+
+
+
+
+
+
          while ($row = mysqli_fetch_array($result))
         {
              echo "<tr>";
@@ -75,23 +79,24 @@ else
              echo "<td>". $row['email']."</td>";
              echo "<td>". $row['DOB']."</td>";
              echo "<td>". $row['telephone']."</td>";
-             
+             echo "<td> <a href='edit.php'>"{$_GET['username']}.$this; "</td>";
+
              echo "</tr>";
          }
-            
+
 
              echo "</table>";
-            
 
-            
-            
-            
-            
-        
+
+
+
+
+
+
             }
     }
-        
-    
+
+
 
             else
             {
@@ -114,7 +119,7 @@ echo <<<_END
 
 </body>
 _END;
-    
+
 require_once "footer.php";
 include'styleSheet.css';
 

@@ -74,13 +74,13 @@ else
 
 // put some data in our table:
 // create an array variable for each field in the DB that we want to populate
-     
+$usernames[] = 'admin'; $passwords[] = 'admin1234'; $firstnames[] = 'Kashif'; $surnames[] ='Tauseef'; $emails[] = 'kashiftauseef@gmail.com'; $DOBs[] = '20/03/1996'; $telephones [] = '07412817604';    
       
 $usernames[] = 'barrym'; $passwords[] = 'letmein'; $firstnames[] = 'barton'; $surnames[] ='morris'; $emails[] = 'barry@m-domain.com'; $DOBs[] = '20/03/1996'; $telephones [] = '07412817604';
 
 $usernames[] = 'mandyb'; $passwords[] = 'abc123'; $firstnames[] = 'mandy'; $surnames[] ='maddison'; $emails[] = 'webmaster@mandy-g.co.uk'; $DOBs[] = '20/03/1998'; $telephones [] = '07412817605';
 
-$usernames[] = 'admin'; $passwords[] = 'admin1234'; $firstnames[] = 'Kashif'; $surnames[] ='Tauseef'; $emails[] = 'kashiftauseef@gmail.com'; $DOBs[] = '20/03/1996'; $telephones [] = '07412817604';
+
 
 
 

@@ -70,7 +70,7 @@ function validateInt($field, $min, $max)
 
 // all other validation functions should follow the same rule:
 // if the data is valid return an empty string, if the data is invalid return a help message
-function validateSanitizeEmail($field)
+function emailValidation($field)
 {
     // Remove all illegal characters from email
     $field = filter_var($field, FILTER_SANITIZE_EMAIL);
@@ -83,7 +83,7 @@ function validateSanitizeEmail($field)
 
     else {
         return "Please enter correct email address";
-    }
+        }
 
 }
 

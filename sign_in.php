@@ -17,6 +17,8 @@
 // execute the header script:
 require_once "header.php";
 
+
+
 // default values we show in the form:
 $username = "";
 $password = "";
@@ -84,7 +86,10 @@ elseif (isset($_POST['username']))
                 // set a session variable to record that this user has successfully logged in:
                 $_SESSION['loggedInSkeleton'] = true;
                 // and copy their username into the session data for use by our other scripts:
+                
+                
                 $_SESSION['username'] = $username;
+
 
                 // show a successful signin message:
                 $message = "Hi, $username, you have successfully logged in, please <a href='account.php'>click here</a><br>";
