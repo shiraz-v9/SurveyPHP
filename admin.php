@@ -13,6 +13,8 @@ require_once "header.php";
 // read in the details of our MySQL server:
 require_once "credentials.php";
 
+
+
 // connect to the host:
 $connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
@@ -39,8 +41,7 @@ else
 		echo "This is the adminitrator tools where you (Admin) should be able to access a
 		list of all users and, upon clicking on a username, that user’s associated account information should be displayed.<br>";
 
-//        $query = "SELECT username, password, firstname,                 surname, email, DOB , telephone
-//        FROM users WHERE username='{$_GET['username']}'";
+
         $query = "SELECT * FROM users";
 
         // this query can return data ($result is an identifier):
@@ -59,7 +60,7 @@ else
             <th> Email</th>
             <th> Date of Birth</th>
             <th> Phone </th>
-            <th> Edit </th>
+            
 
             </tr>";
 
@@ -79,8 +80,9 @@ else
              echo "<td>". $row['email']."</td>";
              echo "<td>". $row['DOB']."</td>";
              echo "<td>". $row['telephone']."</td>";
-             echo "<td> <a href='edit.php'>"{$_GET['username']}.$this; "</td>";
 
+             
+             
              echo "</tr>";
          }
 
@@ -114,8 +116,20 @@ echo <<<_END
 </head>
 <body>
 
-<a href='delete'>Delete record</a>
+<br>
 <a href='account_set.php'>Update record</a>
+<a href='edit.php'>Edit page</a>
+
+<!-- edit username form -->
+    <form action="edit.php" method="post">
+      <br>enter username you want to edit: <br>
+      Username: <input type="text" name="username" maxlength="16" value="" required>
+
+      <input type="submit" value="Submit">
+    </form>	
+
+
+
 
 </body>
 _END;
