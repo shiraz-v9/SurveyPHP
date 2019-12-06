@@ -14,6 +14,11 @@ require_once "header.php";
 // read in the details of our MySQL server:
 require_once "credentials.php";
 
+
+$answer1 = "";
+$answer2 = "";
+$answer3 = "";
+
 // connect to the host:
 $connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
@@ -37,30 +42,33 @@ else
 {
 	echo "Here you can complete existing surveys or create some<br>";
     echo "Select & complete from the surveys below <br>";
-    
-    
+
+
     echo " <br><br><a href = 'simpleSurvey.php'>" . "Simple Survey" . "</a>";
-    
-    
-    
-    
+    echo " <a href = 'custom_survey.php'>" . "Create Survey" . "</a>";
+		echo " <a href = 'fill_surveys.php'>" . "Fill Surveys" . "</a>";
+		echo " <a href = 'my_surveys.php'>" . "My Surveys" . "</a>";
+    $display_charts = false;
+
+
+
     // a little extra text that only the admin will see:
 	if ($_SESSION['username'] == "admin")
 	{
 
-        
+
 
         echo "<h3> Simple Survey </h3>";
-        
+
         $query = "SELECT * FROM simplesurvey";
-        
-        
-        
+
+
+
         $result = mysqli_query($connection, $query);
-        
+
         $n = mysqli_num_rows($result);
-        
-        
+
+
         if ($n>0){
             echo "<table><br><br><tr>
             <th> Username</th>
@@ -69,16 +77,16 @@ else
             <th> Gender </th>
             <th> Favourite Colour </th>
             <th> Preferred travel way </th>
-            
-            
+
+
 
             </tr>";
-            
-            
-            
-            while ($row = mysqli_fetch_array($result))       
+
+
+
+            while ($row = mysqli_fetch_array($result))
         {
-            
+
              echo "<tr>";
              echo "<td>". $row['surveyID']."</td>";
              echo "<td>". $row['q1']."</td>";
@@ -87,15 +95,15 @@ else
              echo "<td class='colored']>".$row['q4']."</td>";
 //            $color = $row['q4'];
              echo "<td>". $row['q5']."</td>";
-             
 
-             
-             
+
+
+
              echo "</tr>";
          }
             echo "</table>";
-            
-            
+
+
             //CHART QUERY for MAN
             $man = "SELECT COUNT(q3) FROM simplesurvey
             WHERE q3 = 'Man'";
@@ -103,8 +111,8 @@ else
             $result = mysqli_query($connection, $man);
             while ($row = mysqli_fetch_array($result))
             $answer1 = $row['COUNT(q3)'];
-            
-            
+
+
              //CHART QUERY for Female
             $female = "SELECT COUNT(q3) FROM simplesurvey
             WHERE q3 = 'Woman'";
@@ -112,7 +120,7 @@ else
             $result = mysqli_query($connection, $female);
             while ($row = mysqli_fetch_array($result))
             $answer2 = $row['COUNT(q3)'];
-            
+
             //CHART QUERY for Prefer not to say
             $other = "SELECT COUNT(q3) FROM simplesurvey
             WHERE q3 = 'Prefer not to say'";
@@ -120,18 +128,19 @@ else
             $result = mysqli_query($connection, $other);
             while ($row = mysqli_fetch_array($result))
             $answer3 = $row['COUNT(q3)'];
+            $display_charts = true;
         }
-        
-        
+
+
 	}
-   
-    
+
+
 }
 
 
 
 
-
+if($display_charts){
 echo "<h3> CHARTS </h3>";
 echo <<<_END
   <head>
@@ -162,6 +171,7 @@ echo <<<_END
   </body>
 </html>
 _END;
+}
 
 
 

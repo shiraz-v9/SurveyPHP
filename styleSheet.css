@@ -80,10 +80,18 @@ body
     background-repeat: no-repeat;
 }
 
-form, h1, h2 , h3 , h4 , h5 , h6 
+form, h1, h2 , h3 , h4 , h5 , h6 , p , echo.php
 {
     font-family: 'Arvo', serif;
+    text-align: left;
+    
 
+}
+
+#navbar
+{
+    display: block;
+    align-content: center;
 }
 
 /*

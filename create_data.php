@@ -1,10 +1,10 @@
 <?php
 // Things to notice:
 // This file is the first one we will run when we mark your submission
-// Its job is to: 
-// Create your database (currently called "skeleton", see credentials.php)... 
-// Create all the tables you will need inside your database (currently it makes a simple "users" table, you will probably need more and will want to expand fields in the users table to meet the assignment specification)... 
-// Create suitable test data for each of those tables 
+// Its job is to:
+// Create your database (currently called "skeleton", see credentials.php)...
+// Create all the tables you will need inside your database (currently it makes a simple "users" table, you will probably need more and will want to expand fields in the users table to meet the assignment specification)...
+// Create suitable test data for each of those tables
 // NOTE: this last one is VERY IMPORTANT - you need to include test data that enables the markers to test all of your site's functionality
 
 // read in the details of our MySQL server:
@@ -20,15 +20,15 @@ if (!$connection)
 {
 	die("Connection failed: " . $mysqli_connect_error);
 }
-  
+
 // build a statement to create a new database:
 $sql = "CREATE DATABASE IF NOT EXISTS " . $dbname;
 
 // no data returned, we just test for true(success)/false(failure):
-if (mysqli_query($connection, $sql)) 
+if (mysqli_query($connection, $sql))
 {
 	echo "Database created successfully, or already exists<br>";
-} 
+}
 else
 {
 	die("Error creating database: " . mysqli_error($connection));
@@ -45,13 +45,13 @@ mysqli_select_db($connection, $dbname);
 $sql = "DROP TABLE IF EXISTS users";
 
 // no data returned, we just test for true(success)/false(failure):
-if (mysqli_query($connection, $sql)) 
+if (mysqli_query($connection, $sql))
 {
 	echo "Dropped existing table: users<br>";
 }
 
-else 
-{	
+else
+{
 	die("Error checking for existing table: " . mysqli_error($connection));
 }
 
@@ -60,12 +60,12 @@ else
 $sql = "CREATE TABLE users(username VARCHAR(16), password VARCHAR(16), firstname VARCHAR(16), surname VARCHAR(16), email VARCHAR(64), DOB VARCHAR(12), telephone VARCHAR(16),PRIMARY KEY(username))";
 
 // no data returned, we just test for true(success)/false(failure):
-if (mysqli_query($connection, $sql)) 
+if (mysqli_query($connection, $sql))
 {
 	echo "Table created successfully: users<br>";
 }
 
-else 
+else
 {
 	die("Error creating table: " . mysqli_error($connection));
 }
@@ -73,8 +73,8 @@ else
 
 // put some data in our table:
 // create an array variable for each field in the DB that we want to populate
-$usernames[] = 'admin'; $passwords[] = 'secret'; $firstnames[] = 'Kashif'; $surnames[] ='Tauseef'; $emails[] = 'kashiftauseef@gmail.com'; $DOBs[] = '20/03/1996'; $telephones [] = '07412817604';    
-      
+$usernames[] = 'admin'; $passwords[] = 'secret'; $firstnames[] = 'Kashif'; $surnames[] ='Tauseef'; $emails[] = 'kashiftauseef@gmail.com'; $DOBs[] = '20/03/1996'; $telephones [] = '07412817604';
+
 $usernames[] = 'barrym'; $passwords[] = 'letmein'; $firstnames[] = 'barton'; $surnames[] ='morris'; $emails[] = 'barry@m-domain.com'; $DOBs[] = '20/03/1996'; $telephones [] = '07412817604';
 
 $usernames[] = 'mandyb'; $passwords[] = 'abc123'; $firstnames[] = 'mandy'; $surnames[] ='maddison'; $emails[] = 'webmaster@mandy-g.co.uk'; $DOBs[] = '20/03/1998'; $telephones [] = '07412817605';
@@ -99,7 +99,7 @@ for ($i=0; $i<count($usernames); $i++)
 {
 	// create the SQL query to be executed
     $sql = "INSERT INTO users (username, password, firstname, surname, email, DOB, telephone) VALUES ('{$usernames[$i]}', '{$passwords[$i]}', '{$firstnames[$i]}','{$surnames[$i]}', '{$emails[$i]}', '{$DOBs[$i]}', '{$telephones[$i]}')";
-	
+
 	// run the above query '$sql' on our DB
     // no data returned, we just test for true(success)/false(failure):
 	if (mysqli_query($connection, $sql))
@@ -107,7 +107,7 @@ for ($i=0; $i<count($usernames); $i++)
 		echo "row inserted correctly <br>";
 	}
 
-	else 
+	else
 	{
 		die("Error inserting row: <br>" . mysqli_error($connection));
 	}
@@ -120,7 +120,7 @@ for ($i=0; $i<count($usernames); $i++)
 
 
 
-//CREATE TABLE 
+//CREATE TABLE
 
 ///////////////////////////////////////////
 ////////////// survey table  //////////////
@@ -130,13 +130,13 @@ for ($i=0; $i<count($usernames); $i++)
 $sql = "DROP TABLE IF EXISTS simplesurvey";
 
 // no data returned, we just test for true(success)/false(failure):
-if (mysqli_query($connection, $sql)) 
+if (mysqli_query($connection, $sql))
 {
 	echo "<br>Dropped existing table: simpleSurvey<br>";
 }
 
-else 
-{	
+else
+{
 	die("Error checking for existing table: " . mysqli_error($connection));
 }
 
@@ -147,21 +147,21 @@ else
 
 // make our table:
 // notice that the username field is a PRIMARY KEY and so must be unique in each record
-$sql = "CREATE TABLE simplesurvey(surveyID VARCHAR(16), 
-q1 VARCHAR(30), 
-q2 VARCHAR(30), 
-q3 VARCHAR(30), 
+$sql = "CREATE TABLE simplesurvey(surveyID VARCHAR(16),
+q1 VARCHAR(30),
+q2 VARCHAR(30),
+q3 VARCHAR(30),
 q4 VARCHAR(30),
-q5 VARCHAR(30), 
+q5 VARCHAR(30),
 PRIMARY KEY(surveyID))";
 
 // no data returned, we just test for true(success)/false(failure):
-if (mysqli_query($connection, $sql)) 
+if (mysqli_query($connection, $sql))
 {
 	echo "Table created successfully: simplesurvey<br>";
 }
 
-else 
+else
 {
 	die("Error creating table: " . mysqli_error($connection));
 }
@@ -186,15 +186,15 @@ $surveyID[] = 'jourab'; $q1[] = 'Jourdain'; $q2[] = 'Bap'; $q3[] = 'Woman'; $q4[
 for ($i=0; $i<count($surveyID); $i++)
 {
 	// create the SQL query to be executed
-    $sql = "INSERT INTO simplesurvey 
-    (surveyID, q1, q2, q3, q4, q5) 
-    VALUES ('{$surveyID[$i]}', 
-    '{$q1[$i]}', 
+    $sql = "INSERT INTO simplesurvey
+    (surveyID, q1, q2, q3, q4, q5)
+    VALUES ('{$surveyID[$i]}',
+    '{$q1[$i]}',
     '{$q2[$i]}',
-    '{$q3[$i]}', 
-    '{$q4[$i]}', 
+    '{$q3[$i]}',
+    '{$q4[$i]}',
     '{$q5[$i]}')";
-	
+
 	// run the above query '$sql' on our DB
     // no data returned, we just test for true(success)/false(failure):
 	if (mysqli_query($connection, $sql))
@@ -202,11 +202,99 @@ for ($i=0; $i<count($surveyID); $i++)
 		echo "row inserted correctly <br>";
 	}
 
-	else 
+	else
 	{
 		die("Error inserting row: <br>" . mysqli_error($connection));
 	}
 }
+
+
+
+
+
+
+///////////////////////////////////////////
+//////////// new survey table  ////////////
+///////////////////////////////////////////
+
+// if there's an old version of our table, then drop it:
+$sql = "DROP TABLE IF EXISTS newsurvey";
+
+// no data returned, we just test for true(success)/false(failure):
+if (mysqli_query($connection, $sql))
+{
+	echo "<br>Dropped existing table: newsurvey<br>";
+}
+
+else
+{
+	die("Error checking for existing table: " . mysqli_error($connection));
+}
+
+
+// make our table:
+// notice that the username field is a PRIMARY KEY and so must be unique in each record
+$sql = "CREATE TABLE newsurvey(surveyorID int NOT NULL AUTO_INCREMENT,
+surveyor VARCHAR(16),
+question1 VARCHAR(140),
+question2 VARCHAR(140),
+question3 VARCHAR(140),
+question4 VARCHAR(140),
+question5 VARCHAR(140),
+question6 VARCHAR(140),
+PRIMARY KEY(surveyorID))";
+
+// no data returned, we just test for true(success)/false(failure):
+if (mysqli_query($connection, $sql))
+{
+	echo "Table created successfully: simplesurvey<br>";
+}
+
+else
+{
+	die("Error creating table: " . mysqli_error($connection));
+}
+
+
+//SAMPLE DATA HERE
+$surveyor[] = 'banilla'; $question1[] = 'favourite holiday spot?'; $question2[] = 'favourite snack?'; $question3[] = 'Are you a Windows or Mac user?'; $question4[] = 'Coffee or Tea?'; $question5[] = 'Leave or Remain?'; $question6[] = 'Favourite Comedy?';
+
+$surveyor[] = 'beccas'; $question1[] = 'Favorite Day Of The Week?'; $question2[] = 'What Life Lessons Would You Pass On To Your Children?'; $question3[] = 'Who Or What Inspires You To Be A Better Person?'; $question4[] = 'What Is The Best And Worst Part Of Your Personality?'; $question5[] = 'What Is The Reason You Are Most Grateful In Your Life?'; $question6[] = 'Do You Have A Special Place You Like To Visit Regularly?';
+
+$surveyor[] = 'banilla'; $question1[] = 'What Is Your Favorite Type Of Workout?'; $question2[] = 'What Is Your Favorite Type Of Workout?'; $question3[] = 'Do You Have Tattoos?'; $question4[] = 'Who Gives You The Courage To Try New Things?'; $question5[] = 'When You Meet Someone You’re Attracted To, What Do You First Notice About Them?'; $question6[] = 'Who From Your Past Do You Really Wish You’d Stayed In Contact With?';
+
+
+
+
+// loop through the arrays above and add rows to the table:
+for ($i=0; $i<count($surveyor); $i++)
+{
+	// create the SQL query to be executed
+    $sql = "INSERT INTO newsurvey
+    (surveyor, question1, question2, question3, question4, question5, question6)
+    VALUES ('{$surveyor[$i]}',
+    '{$question1[$i]}',
+    '{$question2[$i]}',
+    '{$question3[$i]}',
+    '{$question4[$i]}',
+    '{$question5[$i]}',
+    '{$question6[$i]}')";
+
+	// run the above query '$sql' on our DB
+    // no data returned, we just test for true(success)/false(failure):
+	if (mysqli_query($connection, $sql))
+	{
+		echo "row inserted correctly <br>";
+	}
+
+	else
+	{
+		die("Error inserting row: <br>" . mysqli_error($connection));
+	}
+}
+
+
+
 
 
 // we're finished, close the connection:

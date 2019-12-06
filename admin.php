@@ -39,6 +39,7 @@ else
 	// only display the page content if this is the admin account (all other users get a "you don't have permission..." message):
 	if ($_SESSION['username'] == "admin")
 	{
+		echo "<h2>All Users</h2>";
 		echo "This is the adminitrator tools where you (Admin) should be able to access a
 		list of all users and, upon clicking on a username, that user’s associated account information should be displayed.<br>";
         $update_form = true;
@@ -119,7 +120,7 @@ if ($update_form)
           Username: <input type="text" name="username" maxlength="16" value="" required>
 
           <input type="submit" value="Submit">
-        </form>	
+        </form>
 
 
 

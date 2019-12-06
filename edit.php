@@ -22,8 +22,7 @@ $email_val = "";
 $DOB_val = "";
 $telephone_val = "";
 
-//form set to hidden initially 
-$update_form = false;
+
 
 // message to output to user:
 $message = "";
@@ -59,8 +58,8 @@ else if (isset($_POST['username']))
     }
     
     // SANITISATION CODE :
-    $newuser = sanitise($_POST['username'], $connection);
-    $password = sanitise($_POST['password'], $connection);
+//    $newuser = sanitise($_POST['username'], $connection);
+//    $password = sanitise($_POST['password'], $connection);
     $firstname = sanitise($_POST['firstname'], $connection);
     $surname = sanitise($_POST['surname'], $connection);
     $email = sanitise($_POST['email'], $connection);
@@ -68,8 +67,8 @@ else if (isset($_POST['username']))
     $telephone = sanitise($_POST['telephone'], $connection);
     
     // SERVER-SIDE VALIDATION
-    $username_val = validateString($newuser, 1, 16);
-    $password_val = validateString($password, 1, 16);
+//    $username_val = validateString($newuser, 1, 16);
+//    $password_val = validateString($password, 1, 16);
     $firstname_val = validateString($firstname, 1,32);
     $surname_val = validateString($surname, 1,64);
     //the following line will validate the email as a string, but maybe you can do a better job...
@@ -96,15 +95,9 @@ else if (isset($_POST['username']))
         if ($num > 0 )
         {    
             // Insert the new details into database
-            $update =   "UPDATE users
-                        SET username = '$newuser',
-                        password = '$password',
-                        firstname = '$firstname',
-                        surname = '$surname',
-                        email = '$email',
-                        DOB = '$DOB',
-                        telephone = '$telephone',
-                        WHERE username = '$user'";
+            $update =   "UPDATE users SET firstname = '$firstname', surname = '$surname',               email = '$email', DOB = '$DOB', telephone = '$telephone', WHERE users.username = '$editusername'";
+            //username = '$newuser',
+            //password = '$password',
 
             $result = mysqli_query($connection, $update);
         }
@@ -116,7 +109,7 @@ else if (isset($_POST['username']))
 
         if ($result)
         {
-            //$update_form = false;
+            $update_form = false;
             $message = "Profile successfully updated<br>";
             // we're finished with the database, close the connection:
             //
@@ -137,7 +130,7 @@ else
     echo "<br>Sorry, that's not a matching username";
 }
     
-if($update_form = true)
+if($update_form)
 {
     $connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
     
@@ -183,8 +176,11 @@ echo <<<_END
 
 <body>
 <form action="edit.php" method="post">
+<!--
      Username: <input type="username" name="username" maxlength="32" value="$user" >$username_val
      <br>Password: <input type="password" name="password" maxlength="16" value="$value1" >$password_val
+-->
+<p> Username $user </p>
      <br>firstname: <input type="text" name="firstname" maxlength="64" value="$value2" >$firstname_val
      <br>surname: <input type="text" name="surname" maxlength="64" value="$value3" >$surname_val
      <br>mail: <input type="email" name="email" maxlength="64" value="$value4" >$email_val

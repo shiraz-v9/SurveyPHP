@@ -27,24 +27,29 @@ echo <<<_END
 <!DOCTYPE html>
 <html>
 <head><title>A Survey Website</title></head>
-<body>
+
 
 <!--THIS IS THE FONT CSS, IT WILL BE AVAILABLE EVERYWHERE BECAUSE IS IT IN HEADER-->
 <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
-
-<a href='about.php'>About</a> ||
-<a href='account.php'>My Account</a> ||
-<a href='surveys_manage.php'>My Surveys</a> ||
-<a href='competitors.php'>Design and Analysis</a> ||
+<div id ="navbar">
+<a href='about.php'>About</a> ~
+<a href='account.php'>My Account</a> ~
+<a href='surveys_manage.php'>My Surveys</a> ~
+<a href='competitors.php'>Design and Analysis</a> ~
 <a href='sign_out.php'>Sign Out ({$_SESSION['username']})</a>
+
 _END;
 
     // add an extra menu option if this was the admin:
     // this allows us to display the admin tools to them only
 	if ($_SESSION['username'] == "admin")
 	{
-		echo " |||| <a href='admin.php'>Admin Tools</a>";
+        //including all my link in this div, so then styled in the CSS
+        echo <<<_END
+		 ~ <a href='admin.php'>Admin Tools</a></div>
+_END;
 	}
+
 }
 
 else

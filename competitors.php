@@ -36,9 +36,9 @@ else
 <body>
     <h1>Analysis & design</h1>
     <p> In this section I will be comparing some popular survey websites and   evaluate how they are presented. 
-    My competitor choice is Survey Monkey & Google forms.
+    My competitor choice is Survey Monkey & Google forms.</p>
 
-    <h3> Google forms</h3>
+    <h3> Google forms</h3><p>
     Google within their popular way of collaborating through G suite they have forms that can be made through collaboration if you are working in a team, or they can be made individually for the public for free.<br>
     The layout of the forms is very straightforward, there are many already made templates that you as a user can choose and edit.
     </p>
