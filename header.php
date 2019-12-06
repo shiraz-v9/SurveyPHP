@@ -28,6 +28,10 @@ echo <<<_END
 <html>
 <head><title>A Survey Website</title></head>
 <body>
+
+<!--THIS IS THE FONT CSS, IT WILL BE AVAILABLE EVERYWHERE BECAUSE IS IT IN HEADER-->
+<link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+
 <a href='about.php'>About</a> ||
 <a href='account.php'>My Account</a> ||
 <a href='surveys_manage.php'>My Surveys</a> ||
@@ -51,13 +55,16 @@ echo <<<_END
 <!DOCTYPE html>
 <html>
 <body>
+
+<!--THIS IS THE FONT CSS, IT WILL BE AVAILABLE EVERYWHERE BECAUSE IS IT IN HEADER-->
+<link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+
+
+
 <a href='about.php'>About</a> ||
 <a href='sign_up.php'>Sign Up</a> ||
 <a href='sign_in.php'>Sign In</a>
-<a href='create_data.php'>delete this</a>
 
-
-    
     
 _END;
     
@@ -65,7 +72,7 @@ _END;
 
 echo <<<_END
 <br>
-<h1>Kashif Tauseef: A Survey Website</h1>
+<h1>Kash's Survey Zone</h1>
 _END;
 
 include 'styleSheet.css';

@@ -161,13 +161,7 @@ echo <<<_END
   <input type="submit" value="Submit">
 </form>	
 
-<!DOCTYPE html>
-<html>
-<head>
-<link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
 
-</head>
-<body>
 _END;
 }
 

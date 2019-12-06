@@ -15,29 +15,10 @@
 require_once "header.php";
 
 
-//
-//$connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-//
-//	// if the connection fails, we need to know, so allow this exit:
-//	if (!$connection)
-//	{
-//		die("Connection failed: " . $mysqli_connect_error);
-//	}
-//$sql = "SELECT * FROM users WHERE username='$username'";
-//$result= mysqli_query($connection, $sql);
-//$n= mysqli_num_rows($result);
-//
-//if (n>0){
-//
-//    
-//    
-//    
-//}
-
 
 // default values we show in the form:
-$firstname = "{$_SESSION['firstname']}";
-$surname = "new name";
+$firstname = "";
+$surname = "";
 $email = "";
 $DOB = "";
 $telephone = "";
@@ -99,7 +80,7 @@ elseif (isset($_POST['firstname']))
 
     //EMAIL NEED FIXING
 
-	   $email_val = validateString($email, 1,64);
+    $email_val = validateString($email, 1,64);
 
 
     $DOB_val = validateString($DOB, 1,16);
@@ -131,13 +112,7 @@ elseif (isset($_POST['firstname']))
 		// if there was a match then UPDATE their profile data, otherwise INSERT it:
 		if ($n > 0)
 		{
-            //starting new sessions new sessions 
-                $_SESSION['firstname'] = $sfirstname;
-                $_SESSION['surname'] = $ssurname;
-                $_SESSION['email'] = $semail;
-                $_SESSION['DOB'] = $sDOB;
-                $_SESSION['telephone'] = $stelephone;
-                        
+             
             
 			// we need an UPDATE:
             $query = "UPDATE users SET firstname='$firstname', surname='$surname', email='$email', DOB='$DOB', telephone='$telephone'
@@ -206,8 +181,14 @@ elseif (isset($_POST['firstname']))
             // use the identifier to fetch one row as an associative array (elements named after columns):
             $row = mysqli_fetch_assoc($result);
             // extract their profile data for use in the HTML:
+            
+            $name = $row['firstname'];
+            $surname = $row['surname'];
             $email = $row['email'];
-
+            $dob = $row['DOB'];
+            $phone = $row['telephone'];
+            
+            
         }
 
         // show the set profile form:
@@ -228,15 +209,15 @@ echo <<<_END
       Update your profile info:<br>
       Username: {$_SESSION['username']}
       <br>
-      First Name: <input type="text" name="firstname" maxlength="64" value="$firstname">$firstname_val
+      First Name: <input type="text" name="firstname" maxlength="64" value="$name">$firstname_val
       <br>
       Surname: <input type="text" name="surname" maxlength="64" value="$surname">$surname_val
       <br>
       Email address: <input type="email" name="email" maxlength="64" value="$email">$email_val
       <br>
-      DOB: <input type="date" name="DOB" maxlength="12" value="$DOB">$DOB_val
+      DOB: <input type="date" name="DOB" maxlength="12" value="$dob">$DOB_val
       <br>
-      Phone: <input type="text" name="telephone" maxlength="15" value="$telephone">$telephone_val
+      Phone: <input type="text" name="telephone" maxlength="15" value="$phone">$telephone_val
       <br>
       <input type="submit" value="Submit">
     </form>
