@@ -52,20 +52,20 @@
 
 
 
-   // if the data is valid return an empty string, if the data is invalid return a help message
-   function validateInt($field, $min, $max)
-   {
-   	// see PHP manual for more info on the options: http://php.net/manual/en/function.filter-var.php
-   	$options = array("options" => array("min_range"=>$min,"max_range"=>$max));
+	 // if the data is valid return an empty string, if the data is invalid return a help message
+	 function validateInt($field, $min, $max)
+	 {
+	 	// see PHP manual for more info on the options: http://php.net/manual/en/function.filter-var.php
+	 	$options = array("options" => array("min_range"=>$min,"max_range"=>$max));
 
-   	if (!filter_var($field, FILTER_VALIDATE_INT, $options))
-       {
-   		// wasn't a valid integer, return a help message:
-           return "Not a valid number (must be whole and in the range: " . $min . " to " . $max . ")";
-       }
-   	// data was valid, return an empty string:
-       return "";
-   }
+	 	if (!filter_var($field, FILTER_VALIDATE_INT, $options))
+	     {
+	 		// wasn't a valid integer, return a help message:
+	         return "Not a valid number (must be whole and in the range: " . $min . " to " . $max . ")";
+	     }
+	 	// data was valid, return an empty string:
+	     return "";
+	 }
 
    // all other validation functions should follow the same rule:
    // if the data is valid return an empty string, if the data is invalid return a help message
