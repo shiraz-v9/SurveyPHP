@@ -39,8 +39,8 @@ elseif(isset($_POST['Submit'])){
 
 
 
-    $sql = "INSERT INTO newsurvey
-    (surveyor, question1, question2, question3, question4, question5, question6)
+    $sql = "INSERT INTO surveyquestion
+    (surveyor, surveyName, question2, question3, question4, question5, question6)
     VALUES ('{$_POST['ID']}', '{$_POST['one']}', '{$_POST['two']}', '{$_POST['three']}', '{$_POST['four']}', '{$_POST['five']}', '{$_POST['six']}')";
 
     $result = mysqli_query($connection, $sql);
@@ -77,14 +77,14 @@ echo <<<_END
 <form action="custom_survey.php" method="post">
 
     <h4>Custom Survey </h4>
-    Surveyor: <input type="text" name="ID" maxlength="30" value="{$_SESSION['username']}" required><br><br>
+    Surveyor: <br><input type="text" name="ID" maxlength="30" value="{$_SESSION['username']}" readonly><br><br>
 
-    Question 1: <input type="text" name="one" maxlength="140" value="" ><br>
-    Question 2: <input type="text" name="two" maxlength="140" value="" ><br>
-    Question 3: <input type="text" name="three" maxlength="140" value="" ><br>
-    Question 4: <input type="text" name="four" maxlength="140" value="" ><br>
-    Question 5: <input type="text" name="five" maxlength="140" value="" ><br>
-    Question 6: <input type="text" name="six" maxlength="140" value="" ><br>
+    Name this survey: <br><input type="text" name="one" maxlength="140" placeholder="Survey Name" value="" ><br>
+    Question 1: <br><input type="text" name="two" maxlength="140" placeholder="Any question you'd like" value="" ><br>
+    Question 2: <br><input type="text" name="three" maxlength="140" placeholder="Any question you'd like" value="" ><br>
+    Question 3: <br><input type="text" name="four" maxlength="140"  placeholder="Any question you'd like"value="" ><br>
+    Question 4: <br><input type="text" name="five" maxlength="140" placeholder="Any question you'd like" value="" ><br>
+    Question 5: <br><input type="text" name="six" maxlength="140" placeholder="Any question you'd like" value="" ><br>
 
     <input type="submit" name="Submit"  value="submit">
     </form>

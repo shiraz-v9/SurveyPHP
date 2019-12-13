@@ -214,16 +214,16 @@ for ($i=0; $i<count($surveyID); $i++)
 
 
 ///////////////////////////////////////////
-//////////// new survey table  ////////////
+/////////// surveyquestion table  /////////
 ///////////////////////////////////////////
 
 // if there's an old version of our table, then drop it:
-$sql = "DROP TABLE IF EXISTS newsurvey";
+$sql = "DROP TABLE IF EXISTS surveyquestion";
 
 // no data returned, we just test for true(success)/false(failure):
 if (mysqli_query($connection, $sql))
 {
-	echo "<br>Dropped existing table: newsurvey<br>";
+	echo "<br>Dropped existing table: surveyquestion<br>";
 }
 
 else
@@ -234,9 +234,9 @@ else
 
 // make our table:
 // notice that the username field is a PRIMARY KEY and so must be unique in each record
-$sql = "CREATE TABLE newsurvey(surveyorID int NOT NULL AUTO_INCREMENT,
+$sql = "CREATE TABLE surveyquestion(surveyorID int NOT NULL AUTO_INCREMENT,
 surveyor VARCHAR(16),
-question1 VARCHAR(140),
+surveyName VARCHAR(140),
 question2 VARCHAR(140),
 question3 VARCHAR(140),
 question4 VARCHAR(140),
@@ -247,7 +247,7 @@ PRIMARY KEY(surveyorID))";
 // no data returned, we just test for true(success)/false(failure):
 if (mysqli_query($connection, $sql))
 {
-	echo "Table created successfully: simplesurvey<br>";
+	echo "Table created successfully: surveyquestion<br>";
 }
 
 else
@@ -257,11 +257,11 @@ else
 
 
 //SAMPLE DATA HERE
-$surveyor[] = 'banilla'; $question1[] = 'favourite holiday spot?'; $question2[] = 'favourite snack?'; $question3[] = 'Are you a Windows or Mac user?'; $question4[] = 'Coffee or Tea?'; $question5[] = 'Leave or Remain?'; $question6[] = 'Favourite Comedy?';
+$surveyor[] = 'banilla'; $surveyName[] = 'random1'; $question2[] = 'favourite snack?'; $question3[] = 'Are you a Windows or Mac user?'; $question4[] = 'Coffee or Tea?'; $question5[] = 'Leave or Remain?'; $question6[] = 'Favourite Comedy?';
 
-$surveyor[] = 'beccas'; $question1[] = 'Favorite Day Of The Week?'; $question2[] = 'What Life Lessons Would You Pass On To Your Children?'; $question3[] = 'Who Or What Inspires You To Be A Better Person?'; $question4[] = 'What Is The Best And Worst Part Of Your Personality?'; $question5[] = 'What Is The Reason You Are Most Grateful In Your Life?'; $question6[] = 'Do You Have A Special Place You Like To Visit Regularly?';
+$surveyor[] = 'beccas'; $surveyName[] = 'random2'; $question2[] = 'What Life Lessons Would You Pass On To Your Children?'; $question3[] = 'Who Or What Inspires You To Be A Better Person?'; $question4[] = 'What Is The Best And Worst Part Of Your Personality?'; $question5[] = 'What Is The Reason You Are Most Grateful In Your Life?'; $question6[] = 'Do You Have A Special Place You Like To Visit Regularly?';
 
-$surveyor[] = 'banilla'; $question1[] = 'What Is Your Favorite Type Of Workout?'; $question2[] = 'What Is Your Favorite Type Of Workout?'; $question3[] = 'Do You Have Tattoos?'; $question4[] = 'Who Gives You The Courage To Try New Things?'; $question5[] = 'When You Meet Someone You’re Attracted To, What Do You First Notice About Them?'; $question6[] = 'Who From Your Past Do You Really Wish You’d Stayed In Contact With?';
+$surveyor[] = 'banilla'; $surveyName[] = 'random3'; $question2[] = 'What Is Your Favorite Type Of Workout?'; $question3[] = 'Do You Have Tattoos?'; $question4[] = 'Who Gives You The Courage To Try New Things?'; $question5[] = 'When You Meet Someone You’re Attracted To, What Do You First Notice About Them?'; $question6[] = 'Who From Your Past Do You Really Wish You’d Stayed In Contact With?';
 
 
 
@@ -270,10 +270,10 @@ $surveyor[] = 'banilla'; $question1[] = 'What Is Your Favorite Type Of Workout?'
 for ($i=0; $i<count($surveyor); $i++)
 {
 	// create the SQL query to be executed
-    $sql = "INSERT INTO newsurvey
-    (surveyor, question1, question2, question3, question4, question5, question6)
+    $sql = "INSERT INTO surveyquestion
+    (surveyor, surveyName, question2, question3, question4, question5, question6)
     VALUES ('{$surveyor[$i]}',
-    '{$question1[$i]}',
+    '{$surveyName[$i]}',
     '{$question2[$i]}',
     '{$question3[$i]}',
     '{$question4[$i]}',
@@ -297,13 +297,88 @@ for ($i=0; $i<count($surveyor); $i++)
 
 
 
-// we're finished, close the connection:
-mysqli_close($connection);
-include'styleSheet.css';
 
 
+///////////////////////////////////////////
+//////////// answers table  ///////////////
+///////////////////////////////////////////
+
+// if there's an old version of our table, then drop it:
+$sql = "DROP TABLE IF EXISTS surveyanswer";
+
+// no data returned, we just test for true(success)/false(failure):
+if (mysqli_query($connection, $sql))
+{
+	echo "<br>Dropped existing table: surveyanswer<br>";
+}
+
+else
+{
+	die("Error checking for existing table: " . mysqli_error($connection));
+}
+
+// make our table:
+// notice that the username field is a PRIMARY KEY and so must be unique in each record
+$sql = "CREATE TABLE surveyanswer(answerID int NOT NULL AUTO_INCREMENT,
+username VARCHAR(16),
+author VARCHAR(16),
+answer1 VARCHAR(140),
+answer2 VARCHAR(140),
+answer3 VARCHAR(140),
+answer4 VARCHAR(140),
+answer5 VARCHAR(140),
 
 
+PRIMARY KEY(answerID))";
 
+// no data returned, we just test for true(success)/false(failure):
+if (mysqli_query($connection, $sql))
+{
+	echo "Table created successfully: surveyanswer<br>";
+}
+
+else
+{
+	die("Error creating table: " . mysqli_error($connection));
+}
+
+//SAMPLE DATA HERE
+$username[]='barrym'; $answer1[] = 'banilla'; $answer2[] = 'favourite holiday spot?'; $answer3[] = 'favourite snack?'; $answer4[] = 'Are you a Windows or Mac user?'; $answer5[] = 'Coffee or Tea?';
+
+$username[]='mandyb'; $answer1[] = 'beccas'; $answer2[] = 'Favorite Day Of The Week?'; $answer3[] = 'What Life Lessons Would You Pass On To Your Children?'; $answer4[] = 'Who Or What Inspires You To Be A Better Person?'; $answer5[] = 'What Is The Best And Worst Part Of Your Personality?';
+
+$username[]='beccas'; $answer1[] = 'banilla'; $answer2[] = 'What Is Your Favorite Type Of Workout?'; $answer3[] = 'What Is Your Favorite Type Of Workout?'; $answer4[] = 'Do You Have Tattoos?'; $answer5[] = 'Who Gives You The Courage To Try New Things?';
+
+// loop through the arrays above and add rows to the table:
+for ($i=0; $i<count($username); $i++)
+{
+	// create the SQL query to be executed
+    $sql = "INSERT INTO surveyanswer
+    (username, answer1, answer2, answer3, answer4, answer5)
+    VALUES ('{$username[$i]}',
+		'{$answer1[$i]}',
+    '{$answer2[$i]}',
+    '{$answer3[$i]}',
+    '{$answer4[$i]}',
+    '{$answer5[$i]}')";
+
+
+		// run the above query '$sql' on our DB
+			// no data returned, we just test for true(success)/false(failure):
+		if (mysqli_query($connection, $sql))
+		{
+			echo "row inserted correctly <br>";
+		}
+
+		else
+		{
+			die("Error inserting row: <br>" . mysqli_error($connection));
+		}
+	}
+
+
+	// we're finished, close the connection:
+	mysqli_close($connection);
+	include'styleSheet.css';
 
 ?>

@@ -31,12 +31,12 @@ else
 {
     //run a sql statement that drops surveys if user have submitted
     //all users who are not admin will be shown their work
-    if($loggedinuser == "admin")
+    if($loggedinuser)
     {
 
 
 
-      $survey = "SELECT * FROM newsurvey ";
+      $survey = "SELECT * FROM surveyquestion ";
 
       $result = mysqli_query($connection, $survey);
 
@@ -49,6 +49,7 @@ else
         <th> Select survey</th>
         <th> Complete This </th>
 
+
         </tr>";
       }
       else
@@ -59,7 +60,7 @@ else
       {
         echo "<tr>";
         $ID = $row['surveyorID'];
-        echo "<td>". $row['question1']."</td>";
+        echo "<td>". $row['surveyName']."</td>";
         //SENDING THE ROW ID IN EACH TD LINK
         echo "<td>"."<a href='user_surveys.php?ID=$ID'>Fill </a>"."</td>";
 

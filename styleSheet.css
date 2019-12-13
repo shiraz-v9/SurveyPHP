@@ -1,20 +1,18 @@
 <style>
 
-footer.php{
-    font-size: 40px;
+.footer{
+
     text-align: center;
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    
-    
+
+
+
+
 }
 
 table {
     border: 20px;
     width: 100%;
- 
+
 }
 
 /*table header*/
@@ -28,6 +26,9 @@ background-color: #21D261;
 td{
     height: 30px;
     background-color: white;
+    padding-left: 10px;
+    background-color: #f0f3ff;
+
 }
 
 /*
@@ -43,7 +44,7 @@ a
     font-family: 'Arvo', serif;
 }
 
-        
+
 a:link {
       background-color: black;
       color: white;
@@ -52,7 +53,7 @@ a:link {
       text-align: center;
       text-decoration: none;
       display: inline-block;
-      } 
+      }
 a:hover{
         background-color: #21D261;
         color: white;
@@ -71,21 +72,32 @@ a:active{
 }
 
 
-body    
+body
 {
-    //background-image: url("sur.gif");
+    /* background-image: url("img/sur.gif"); */
     background-position: top;
 
     background-color: #cccccc;
     background-repeat: no-repeat;
+    margin-left: 200px;
+    margin-right: 200px;
 }
 
 form, h1, h2 , h3 , h4 , h5 , h6 , p , echo.php
 {
     font-family: 'Arvo', serif;
     text-align: left;
-    
 
+
+}
+
+img
+{
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
 
 #navbar
@@ -94,11 +106,13 @@ form, h1, h2 , h3 , h4 , h5 , h6 , p , echo.php
     align-content: center;
 }
 
-/*
-background{
-   background-image: linear-gradient(right, white, blue);
+input
+{
+  /* border: 5px solid #21D261; */
+  border-radius: 8px;
+  width: 300px;
+  height: 25px;
 }
-*/
 
 
 </style>

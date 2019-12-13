@@ -64,6 +64,8 @@ else
                 <th> Email</th>
                 <th> Date of Birth</th>
                 <th> Phone </th>
+								<th> Edit </th>
+								<th> Delete </th>
                 </tr>";
 
 
@@ -75,6 +77,7 @@ else
              while ($row = mysqli_fetch_array($result))
                  {
                      echo "<tr>";
+										 $ID = $row['username'];
                      echo "<td>". $row['username']."</td>";
                      echo "<td>". $row['password']."</td>";
                      echo "<td>". $row['firstname']."</td>";
@@ -82,7 +85,9 @@ else
                      echo "<td>". $row['email']."</td>";
                      echo "<td>". $row['DOB']."</td>";
                      echo "<td>". $row['telephone']."</td>";
-
+										 //SENDING THE ROW ID IN EACH TD LINK
+						         echo "<td>"."<a href='update_user.php?ID=$ID'>Update </a>"."</td>";
+										 echo "<td>"."<a href='update_user.php?ID=$ID'>Delete </a>"."</td>";
 
 
                      echo "</tr>";
@@ -104,7 +109,7 @@ else
 
 
 // finish off the HTML for this page:
-if ($update_form)
+if ($update_form = false) //delete this
 {
     echo <<<_END
     <!DOCTYPE html>
@@ -120,6 +125,7 @@ if ($update_form)
           Username: <input type="text" name="username" maxlength="16" value="" required>
 
           <input type="submit" value="Submit">
+
         </form>
 
 

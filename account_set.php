@@ -112,8 +112,8 @@ elseif (isset($_POST['firstname']))
 		// if there was a match then UPDATE their profile data, otherwise INSERT it:
 		if ($n > 0)
 		{
-             
-            
+
+
 			// we need an UPDATE:
             $query = "UPDATE users SET firstname='$firstname', surname='$surname', email='$email', DOB='$DOB', telephone='$telephone'
             WHERE username='{$_SESSION['username']}'";
@@ -181,14 +181,14 @@ elseif (isset($_POST['firstname']))
             // use the identifier to fetch one row as an associative array (elements named after columns):
             $row = mysqli_fetch_assoc($result);
             // extract their profile data for use in the HTML:
-            
+
             $name = $row['firstname'];
             $surname = $row['surname'];
             $email = $row['email'];
             $dob = $row['DOB'];
             $phone = $row['telephone'];
-            
-            
+
+
         }
 
         // show the set profile form:
@@ -206,18 +206,18 @@ echo <<<_END
 
 
     <form action="account_set.php" method="post">
-      Update your profile info:<br>
-      Username: {$_SESSION['username']}
+      Update your profile info:<br><br>
+      Username: {$_SESSION['username']}<br>
       <br>
-      First Name: <input type="text" name="firstname" maxlength="64" value="$name">$firstname_val
+      First Name:<br> <input type="text" name="firstname" maxlength="64" value="$name">$firstname_val
       <br>
-      Surname: <input type="text" name="surname" maxlength="64" value="$surname">$surname_val
+      Surname:<br> <input type="text" name="surname" maxlength="64" value="$surname">$surname_val
       <br>
-      Email address: <input type="email" name="email" maxlength="64" value="$email">$email_val
+      Email:<br> <input type="email" name="email" maxlength="64" value="$email">$email_val
       <br>
-      DOB: <input type="date" name="DOB" maxlength="12" value="$dob">$DOB_val
+      DOB:<br> <input type="date" name="DOB" maxlength="12" value="$dob">$DOB_val
       <br>
-      Phone: <input type="text" name="telephone" maxlength="15" value="$phone">$telephone_val
+      Phone:<br> <input type="text" name="telephone" maxlength="15" value="$phone">$telephone_val
       <br>
       <input type="submit" value="Submit">
     </form>

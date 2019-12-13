@@ -15,9 +15,7 @@ require_once "header.php";
 require_once "credentials.php";
 
 
-$answer1 = "";
-$answer2 = "";
-$answer3 = "";
+
 
 // connect to the host:
 $connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
@@ -35,30 +33,34 @@ if (!isset($_SESSION['loggedInSkeleton']))
 {
 	// user isn't logged in, display a message saying they must be:
 	echo "You must be logged in to view this page.<br>";
+	$display_charts = false;
 }
 
 // the user must be signed-in, show them suitable page content
 else
 {
-	echo "Here you can complete existing surveys or create some<br>";
-    echo "Select & complete from the surveys below <br>";
+	echo "<p>Here you can complete existing surveys or create some<br></p>";
+  echo "<p>Select & complete from the surveys below <br></p>";
 
 
     echo " <br><br><a href = 'simpleSurvey.php'>" . "Simple Survey" . "</a>";
     echo " <a href = 'custom_survey.php'>" . "Create Survey" . "</a>";
 		echo " <a href = 'fill_surveys.php'>" . "Fill Surveys" . "</a>";
 		echo " <a href = 'my_surveys.php'>" . "My Surveys" . "</a>";
+		echo " <a href = 'survey_answers.php'>" . "All Answers" . "</a>";
+
+		//CHARTS ARE FOR ADMIN ONLY
     $display_charts = false;
 
 
 
-    // a little extra text that only the admin will see:
+    // a little extra that only the admin will see:
 	if ($_SESSION['username'] == "admin")
 	{
 
 
 
-        echo "<h3> Simple Survey </h3>";
+        echo "<br><br><h3> Simple Survey Answers</h3>";
 
         $query = "SELECT * FROM simplesurvey";
 
@@ -92,8 +94,7 @@ else
              echo "<td>". $row['q1']."</td>";
              echo "<td>". $row['q2']."</td>";
              echo "<td>". $row['q3']."</td>";
-             echo "<td class='colored']>".$row['q4']."</td>";
-//            $color = $row['q4'];
+             echo "<td>". $row['q4']."</td>";
              echo "<td>". $row['q5']."</td>";
 
 
@@ -129,6 +130,44 @@ else
             while ($row = mysqli_fetch_array($result))
             $answer3 = $row['COUNT(q3)'];
             $display_charts = true;
+
+
+
+						//SECOND CHART QUERIES
+						//counting how many cars
+						$sql = "SELECT COUNT(q5) FROM simplesurvey
+            WHERE q5 = 'Car'";
+            //variables that will store details
+            $result = mysqli_query($connection, $sql);
+            while ($row = mysqli_fetch_array($result))
+            $car = $row['COUNT(q5)'];
+
+						//counting how many Public transport
+						$sql = "SELECT COUNT(q5) FROM simplesurvey
+						WHERE q5 = 'Public transport'";
+						//variables that will store details
+						$result = mysqli_query($connection, $sql);
+						while ($row = mysqli_fetch_array($result))
+						$transport = $row['COUNT(q5)'];
+
+						//counting how many Bikes
+						$sql = "SELECT COUNT(q5) FROM simplesurvey
+						WHERE q5 = 'Bike'";
+						//variables that will store details
+						$result = mysqli_query($connection, $sql);
+						while ($row = mysqli_fetch_array($result))
+						$Bike = $row['COUNT(q5)'];
+
+						//counting how many Bikes
+						$sql = "SELECT COUNT(q5) FROM simplesurvey
+						WHERE q5 = 'Walk'";
+						//variables that will store details
+						$result = mysqli_query($connection, $sql);
+						while ($row = mysqli_fetch_array($result))
+						$Walk = $row['COUNT(q5)'];
+
+
+
         }
 
 
@@ -139,7 +178,8 @@ else
 
 
 
-
+//THE FOLLOWING CHARTS ARE FROM Google
+//I HAVE INSERTED MY SQL VARIABLES INSIDE TO MAKE THEM WORK
 if($display_charts){
 echo "<h3> CHARTS </h3>";
 echo <<<_END
@@ -168,8 +208,83 @@ echo <<<_END
   </head>
   <body>
     <div id="piechart_3d" style="width: 600px; height: 500px;"></div>
+
+
+
+		<br><br><br>
+
+
+  	<!--here is my interactive chart. author GOOGLE-->
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+      // Load the Visualization API and the controls package.
+      google.charts.load('current', {'packages':['corechart', 'controls']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawDashboard);
+
+      // Callback that creates and populates a data table,
+      // instantiates a dashboard, a range slider and a pie chart,
+      // passes in the data and draws it.
+      function drawDashboard() {
+
+        // Create our data table.
+        var data = google.visualization.arrayToDataTable([
+          ['Name', 'SLIDER'],
+          ['Car' , $car],
+          ['Public transport', $transport],
+          ['Bike', $Bike],
+          ['Walk', $Walk]
+        ]);
+
+        // Create a dashboard.
+        var dashboard = new google.visualization.Dashboard(
+            document.getElementById('dashboard_div'));
+
+        // Create a range slider, passing some options
+        var donutRangeSlider = new google.visualization.ControlWrapper({
+          'controlType': 'NumberRangeFilter',
+          'containerId': 'filter_div',
+          'options': {
+            'filterColumnLabel': 'SLIDER'
+          }
+        });
+
+        // Create a pie chart, passing some options
+        var pieChart = new google.visualization.ChartWrapper({
+          'chartType': 'PieChart',
+          'containerId': 'chart_div',
+          'options': {
+            'width': 600,
+            'height': 500,
+            'pieSliceText': 'value',
+            'legend': 'right'
+          }
+        });
+
+        // Establish dependencies, declaring that 'filter' drives 'pieChart',
+        // so that the pie chart will only display entries that are let through
+        // given the chosen slider range.
+        dashboard.bind(donutRangeSlider, pieChart);
+
+        // Draw the dashboard.
+        dashboard.draw(data);
+      }
+    </script>
+  </head>
+
+  <body>
+    <!--Div that will hold the dashboard-->
+    <div id="dashboard_div">
+      <!--Divs that will hold each control and chart-->
+      <div id="filter_div"></div>
+      <div id="chart_div"></div>
+    </div>
   </body>
 </html>
+
 _END;
 }
 

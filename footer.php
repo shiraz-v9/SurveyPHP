@@ -13,8 +13,9 @@ echo <<<_END
 </head>
 
     <body>
-    <p>&copy;6G5Z2107 - Kashif Tauseef - 17088205 - 2019/20</p>
-    
+
+    <p class=footer><br><br>&copy;6G5Z2107 - Kashif Tauseef - 17088205 - 2019/20</p>
+
     </body>
     </html>
 _END;

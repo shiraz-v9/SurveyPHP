@@ -40,7 +40,7 @@ else
 
 
 
-      $survey = "SELECT * FROM newsurvey WHERE surveyor= '$loggedinuser'";
+      $survey = "SELECT * FROM surveyquestion WHERE surveyor= '$loggedinuser'";
 
       $result = mysqli_query($connection, $survey);
 
@@ -51,28 +51,32 @@ else
         echo "<br><br><br><h3>Here are your Surveys</h3>";
         echo "<table><br><tr>
         <th> surveyor</th>
-        <th> Question 1 </th>
+        <th> Name </th>
         <th> Question 2 </th>
         <th> Question 3 </th>
         <th> Question 4 </th>
         <th> Question 5 </th>
         <th> Question 6 </th>
+				<th> Delete survey</th>
         </tr>";
       }
       else
       {
-        echo "<br><br><br><h3>No Surveys made yet..</h3>";
+				echo "<br><br><h3>No Surveys made yet..</h3>";
+				echo "<p>You can create surveys <a href='custom_survey.php'>here </a> </p>";
       }
       while ($row = mysqli_fetch_array($result))
       {
         echo "<tr>";
+				$ID = $row['surveyorID'];
         echo "<td>". $row['surveyor']."</td>";
-        echo "<td>". $row['question1']."</td>";
+        echo "<td>". $row['surveyName']."</td>";
         echo "<td>". $row['question2']."</td>";
         echo "<td>". $row['question3']."</td>";
         echo "<td>". $row['question4']."</td>";
         echo "<td>". $row['question5']."</td>";
         echo "<td>". $row['question6']."</td>";
+				echo "<td>"."<a href='delete_survey.php?ID=$ID'>Delete </a>"."</td>";
         echo "</tr>";
       }
       echo "</table>";
@@ -83,7 +87,7 @@ else
     //ADMINISTRATOR only
     if($loggedinuser == "admin")
     {
-      $survey = "SELECT * FROM newsurvey ";
+      $survey = "SELECT * FROM surveyquestion ";
 
       $result = mysqli_query($connection, $survey);
 
@@ -95,29 +99,33 @@ else
         echo "<table><br><tr>
         <th> ID </th>
         <th> Surveyor </th>
-        <th> Question 1 </th>
+        <th> Survey Name </th>
         <th> Question 2 </th>
         <th> Question 3 </th>
         <th> Question 4 </th>
         <th> Question 5 </th>
         <th> Question 6 </th>
+				<th> Delete survey</th>
         </tr>";
       }
       else
       {
-        echo "<br><br><br><h3>No Surveys made yet..</h3>";
+        echo "<br><br><h3>No Surveys made yet..</h3>";
+				echo "<p>You can create surveys <a href='custom_survey.php'>here </a> </p>";
       }
       while ($row = mysqli_fetch_array($result))
       {
         echo "<tr>";
+				$ID = $row['surveyorID'];
         echo "<td>". $row['surveyorID']."</td>";
         echo "<td>". $row['surveyor']."</td>";
-        echo "<td>". $row['question1']."</td>";
+        echo "<td>". $row['surveyName']."</td>";
         echo "<td>". $row['question2']."</td>";
         echo "<td>". $row['question3']."</td>";
         echo "<td>". $row['question4']."</td>";
         echo "<td>". $row['question5']."</td>";
         echo "<td>". $row['question6']."</td>";
+				echo "<td>"."<a href='delete_survey.php?ID=$ID'>Delete </a>"."</td>";
         echo "</tr>";
       }
       echo "</table>";
