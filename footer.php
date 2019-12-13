@@ -1,24 +1,23 @@
 <?php
+   // Things to notice:
+   // This script is called by every other script (via require_once)
+   // It finishes outputting the HTML for this page:
+   // don't forget to add your own name and student number to the footer
 
-// Things to notice:
-// This script is called by every other script (via require_once)
-// It finishes outputting the HTML for this page:
-// don't forget to add your own name and student number to the footer
+   echo <<<_END
+   <!DOCTYPE html>
 
-echo <<<_END
-<!DOCTYPE html>
+   <head>
+   <link rel="stylesheet" type="text/css" href="styleSheet.css">
+   </head>
 
-<head>
-<link rel="stylesheet" type="text/css" href="styleSheet.css">
-</head>
+       <body>
 
-    <body>
+       <p class=footer><br><br>&copy;6G5Z2107 - Kashif Tauseef - 17088205 - 2019/20</p>
 
-    <p class=footer><br><br>&copy;6G5Z2107 - Kashif Tauseef - 17088205 - 2019/20</p>
-
-    </body>
-    </html>
+       </body>
+       </html>
 _END;
 
-include 'styleSheet.css';
-?>
+   include 'styleSheet.css';
+   ?>

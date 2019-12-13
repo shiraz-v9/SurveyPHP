@@ -1,14 +1,18 @@
 <?php
-// Things to notice:
-// This is an empty page where you can provide a simple overview and description of your site
-// Consider it the 'welcome' page for your survey web site
+   // Things to notice:
+   // This is an empty page where you can provide a simple overview and description of your site
+   // Consider it the 'welcome' page for your survey web site
 
-// execute the header script:
-require_once "header.php";
+   // execute the header script:
+   require_once "header.php";
 
-echo "This is the skeleton code for 2CWK50. See the assignment specification for details of how you need to extend it.<br>You may wish to include a short description of your survey site and how to use the main features it has here.<br><br>";
+   //NO NEED FOR LOGGED IN USER INFORMATION BECAUSE I WANT THIS TO BE SEEN BY EVERYONE ACCESSING THE WEBSITE
 
-// finish of the HTML for this page:
-require_once "footer.php";
+   echo "<p>Welcome dear user.<br><br>This survey website was made by Kashif for Manchester Metropolitan University<br>
+   <br>If you are having any issues with log-in process or want to send a bug report <br><br>
+   please contact  the ADMIN at Kashiftauseef@gmail.com.</p><br><br><br><br><br><br>";
 
-?>
+   // finish of the HTML for this page:
+   require_once "footer.php";
+
+   ?>
