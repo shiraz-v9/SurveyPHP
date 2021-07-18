@@ -13,14 +13,8 @@
    // execute the header script:
    require_once "header.php";
 
+	 require_once "helper.php";
 
-
-   // default values we show in the form:
-   $firstname = "";
-   $surname = "";
-   $email = "";
-   $DOB = "";
-   $telephone = "";
 
    // strings to hold any validation error messages:
 
@@ -45,6 +39,11 @@
    }
 
 
+
+
+
+
+
    elseif (isset($_POST['firstname']))
    {
    	// user just tried to update their profile
@@ -61,29 +60,22 @@
 
 
 
-   	// SANITISATION CODE :
-       // ...
-       // Add your santitisation code around here
-   	// ...
-       $firstname = sanitise($_POST['firstname'], $connection);
+   			// SANITISATION CODE :
+
+       $name = sanitise($_POST['firstname'], $connection);
        $surname = sanitise($_POST['surname'], $connection);
        $email = sanitise($_POST['email'], $connection);
-       $DOB = sanitise($_POST['DOB'], $connection);
-       $telephone = sanitise($_POST['telephone'], $connection);
+       $dob = sanitise($_POST['DOB'], $connection);
+       $phone = sanitise($_POST['telephone'], $connection);
 
        //USER INPUT VALIDATION
        // SERVER-SIDE VALIDATION
 
-       $firstname_val = validateString($firstname, 1,32);
+       $firstname_val = validateString($name, 1,32);
        $surname_val = validateString($surname, 1,64);
-
-       //EMAIL NEED FIXING
-
-       $email_val = validateString($email, 1,64);
-
-
-       $DOB_val = validateString($DOB, 1,16);
-       $telephone_val = validateString($telephone, 1,16);
+       $email_val = emailValidation($email);
+       $DOB_val = validateString($dob, 1,16);
+       $telephone_val = validateString($phone, 1,16);
 
 
 
@@ -114,8 +106,8 @@
 
 
    			// we need an UPDATE:
-               $query = "UPDATE users SET firstname='$firstname', surname='$surname', email='$email', DOB='$DOB', telephone='$telephone'
-               WHERE username='{$_SESSION['username']}'";
+        $query = "UPDATE users SET firstname='$name', surname='$surname', email='$email', DOB='$dob', telephone='$phone'
+        WHERE username='{$_SESSION['username']}'";
    			$result = mysqli_query($connection, $query);
    		}
 
@@ -142,8 +134,7 @@
    		$message = "Update failed, please check the errors above and try again<br>";
    	}
 
-   	// we're finished with the database, close the connection:
-   	mysqli_close($connection);
+
 
    }
 
@@ -193,8 +184,7 @@
            // show the set profile form:
            $show_account_form = true;
 
-           // we're finished with the database, close the connection:
-           mysqli_close($connection);
+
 
        }
 
@@ -216,7 +206,7 @@
          <br>
          DOB:<br> <input type="date" name="DOB" maxlength="12" value="$dob">$DOB_val
          <br>
-         Phone:<br> <input type="text" name="telephone" maxlength="15" value="$phone">$telephone_val
+         Phone:<br> <input type="tel" name="telephone" maxlength="16" value="$phone">$telephone_val
          <br>
          <input type="submit" value="Submit">
        </form>

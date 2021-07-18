@@ -79,15 +79,15 @@
 
    $usernames[] = 'mandyb'; $passwords[] = 'abc123'; $firstnames[] = 'mandy'; $surnames[] ='maddison'; $emails[] = 'webmaster@mandy-g.co.uk'; $DOBs[] = '20/03/1998'; $telephones [] = '07412817605';
 
-   $usernames[] = 'bpt'; $passwords[] = 'abc123'; $firstnames[] = 'Baptista'; $surnames[] ='herrero'; $emails[] = 'bettakobam-3436@yopmail.com'; $DOBs[] = '03-03-1990'; $telephones [] = '202-555-0114';
+   $usernames[] = 'bpt'; $passwords[] = 'abc123'; $firstnames[] = 'Baptista'; $surnames[] ='herrero'; $emails[] = 'bettakobam-3436@yopmail.com'; $DOBs[] = '03-03-1990'; $telephones [] = '2025550114';
 
-   $usernames[] = 'beccas'; $passwords[] = 'abc123'; $firstnames[] = 'Becerra'; $surnames[] ='Lucas'; $emails[] = 'uxennina-3863@yopmail.com'; $DOBs[] = '16-03-1990'; $telephones [] = '202-555-0137';
+   $usernames[] = 'beccas'; $passwords[] = 'abc123'; $firstnames[] = 'Becerra'; $surnames[] ='Lucas'; $emails[] = 'uxennina-3863@yopmail.com'; $DOBs[] = '16-03-1990'; $telephones [] = '2025550137';
 
-   $usernames[] = 'barven'; $passwords[] = 'abc123'; $firstnames[] = 'Barbosa'; $surnames[] ='Steven'; $emails[] = 'ommulerurr-7266@yopmail.com'; $DOBs[] = '22-05-1993'; $telephones [] = '202-555-0133';
+   $usernames[] = 'barven'; $passwords[] = 'abc123'; $firstnames[] = 'Barbosa'; $surnames[] ='Steven'; $emails[] = 'ommulerurr-7266@yopmail.com'; $DOBs[] = '22-05-1993'; $telephones [] = '2025550133';
 
-   $usernames[] = 'banilla'; $passwords[] = 'abc123'; $firstnames[] = 'Baca'; $surnames[] ='Bonilla'; $emails[] = 'asagurryn-8477@yopmail.com'; $DOBs[] = '01-11-1994'; $telephones [] = '202-555-0193';
+   $usernames[] = 'banilla'; $passwords[] = 'abc123'; $firstnames[] = 'Baca'; $surnames[] ='Bonilla'; $emails[] = 'asagurryn-8477@yopmail.com'; $DOBs[] = '01-11-1994'; $telephones [] = '2025550193';
 
-   $usernames[] = 'jourab'; $passwords[] = 'abc123'; $firstnames[] = 'Jourdain'; $surnames[] ='Bap'; $emails[] = 'meluwovaff-8288@yopmail.com'; $DOBs[] = '21-02-1994'; $telephones [] = '202-555-0182';
+   $usernames[] = 'jourab'; $passwords[] = 'abc123'; $firstnames[] = 'Jourdain'; $surnames[] ='Bap'; $emails[] = 'meluwovaff-8288@yopmail.com'; $DOBs[] = '21-02-1994'; $telephones [] = '2025550182';
 
 
 
@@ -343,19 +343,20 @@
    }
 
    //SAMPLE DATA HERE
-   $username[]='barrym'; $answer1[] = 'banilla'; $answer2[] = 'favourite holiday spot?'; $answer3[] = 'favourite snack?'; $answer4[] = 'Are you a Windows or Mac user?'; $answer5[] = 'Coffee or Tea?';
+   $username[]='barrym'; $author[] = 'banilla'; $answer1[] = 'CRISPS'; $answer2[] = 'MAC'; $answer3[] = 'COFFEE'; $answer4[] = 'NO COMMENT'; $answer5[] = 'KEVIN HART';
 
-   $username[]='mandyb'; $answer1[] = 'beccas'; $answer2[] = 'Favorite Day Of The Week?'; $answer3[] = 'What Life Lessons Would You Pass On To Your Children?'; $answer4[] = 'Who Or What Inspires You To Be A Better Person?'; $answer5[] = 'What Is The Best And Worst Part Of Your Personality?';
+   $username[]='mandyb'; $author[] = 'beccas'; $answer1[] = 'survive'; $answer2[] = 'God'; $answer3[] = 'too positive and too emotional'; $answer4[] = 'God'; $answer5[] = 'Yes';
 
-   $username[]='beccas'; $answer1[] = 'banilla'; $answer2[] = 'What Is Your Favorite Type Of Workout?'; $answer3[] = 'What Is Your Favorite Type Of Workout?'; $answer4[] = 'Do You Have Tattoos?'; $answer5[] = 'Who Gives You The Courage To Try New Things?';
+   $username[]='beccas'; $author[] = 'banilla'; $answer1[] = 'Biceps'; $answer2[] = 'yes'; $answer3[] = 'myself'; $answer4[] = 'eyes'; $answer5[] = 'few old friends';
 
    // loop through the arrays above and add rows to the table:
    for ($i=0; $i<count($username); $i++)
    {
    	// create the SQL query to be executed
        $sql = "INSERT INTO surveyanswer
-       (username, answer1, answer2, answer3, answer4, answer5)
+       (username, author, answer1, answer2, answer3, answer4, answer5)
        VALUES ('{$username[$i]}',
+			 '{$author[$i]}',
    		'{$answer1[$i]}',
        '{$answer2[$i]}',
        '{$answer3[$i]}',
